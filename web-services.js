@@ -50,9 +50,10 @@ var Price = mongoose.model('Price', priceSchema);
 
 // create an express app
 var app = express();
+
+//allow cors
 app.use(function (req, res, next) {
-    // res.setHeader('Access-Control-Allow-Origin', 'https://wiggly-kitty.herokuapp.com');
-    res.setHeader('Access-Control-Allow-Origin', 'http://comp4513-assign2-hlazaro.c9users.io:8080');
+    res.setHeader('Access-Control-Allow-Origin', 'https://wiggly-kitty.herokuapp.com');
     next();
 });	
 
@@ -83,8 +84,6 @@ app.route('/api/companies/:symbol')
                 resp.json(data);
             }
         });
-        
-        
     });
 
 /* Portfolio data */
@@ -213,8 +212,6 @@ app.route('/api/prices/recent/:symbol')
                 }
             });
     });
-
-// allow CORS
 
 // use express to listen to port
 app.set('port', (process.env.PORT || 5000));
