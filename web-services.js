@@ -3,7 +3,7 @@ var express = require('express');
 var parser = require('body-parser');
 
 // connect to mongodb
-mongoose.connect('mongodb://haggail:12345@ds239439.mlab.com:39439/heroku_v1l93bgf');
+mongoose.connect('mongodb://haggail:12345@ds111638.mlab.com:11638/heroku_7dsxmj2b');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
 db.once('open', function callback() {
@@ -50,7 +50,7 @@ var Price = mongoose.model('Price', priceSchema);
 // create an express app
 var app = express();
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://fluffy-puppies.herokuapp.com');
+    res.setHeader('Access-Control-Allow-Origin', 'https://wiggly-kitty.herokuapp.com/');
     next();
 });	
 
