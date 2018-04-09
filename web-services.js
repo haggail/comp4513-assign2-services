@@ -217,7 +217,7 @@ app.route('/api/prices/recent/:symbol')
 // allow CORS
 
 // use express to listen to port
-app.set('port', 8081);
+app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'), () => {
     console.log("Server running at port: " + app.get('port'));
 });
