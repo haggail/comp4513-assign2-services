@@ -20,8 +20,7 @@ var companySchema = new mongoose.Schema({
     address: String,
     date_added: String,
     CIK: Number,
-    frequency: Number
-    
+    frequency: Number 
 });
 
 // define portfolio schema
@@ -41,7 +40,6 @@ var priceSchema = new mongoose.Schema({
     close: Number,
     volume: Number,
     name: String
-    
 });
 
 // "compile" the schema into a model
