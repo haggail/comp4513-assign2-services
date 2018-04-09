@@ -3,7 +3,8 @@ var express = require('express');
 var parser = require('body-parser');
 
 // connect to mongodb
-mongoose.connect('mongodb://haggail:12345@ds111638.mlab.com:11638/heroku_7dsxmj2b');
+// mongoose.connect('mongodb://haggail:12345@ds111638.mlab.com:11638/heroku_7dsxmj2b');
+mongoose.connect('mongodb://localhost:27017/alldata');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
 db.once('open', function callback() {
@@ -50,7 +51,8 @@ var Price = mongoose.model('Price', priceSchema);
 // create an express app
 var app = express();
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://wiggly-kitty.herokuapp.com');
+    // res.setHeader('Access-Control-Allow-Origin', 'https://wiggly-kitty.herokuapp.com');
+    res.setHeader('Access-Control-Allow-Origin', 'http://comp4513-assign2-hlazaro.c9users.io:8080');
     next();
 });	
 
@@ -215,7 +217,7 @@ app.route('/api/prices/recent/:symbol')
 // allow CORS
 
 // use express to listen to port
-app.set('port', (process.env.PORT || 5000));
+app.set('port', 8081);
 app.listen(app.get('port'), () => {
     console.log("Server running at port: " + app.get('port'));
 });
