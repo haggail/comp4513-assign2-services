@@ -1,0 +1,19 @@
+{
+  "name": "services",
+  "version": "1.0.0",
+  "description": "",
+  "main": "web-services.js",
+  "scripts": {
+    "start": "node web-services.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": "8.9.4"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.0.13"
+  }
+}
