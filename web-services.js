@@ -3,8 +3,7 @@ var express = require('express');
 var parser = require('body-parser');
 
 // connect to mongodb
-// mongoose.connect('mongodb://haggail:12345@ds111638.mlab.com:11638/heroku_7dsxmj2b');
-mongoose.connect('mongodb://localhost:27017/alldata');
+mongoose.connect('mongodb://haggail:12345@ds111638.mlab.com:11638/heroku_7dsxmj2b');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
 db.once('open', function callback() {
