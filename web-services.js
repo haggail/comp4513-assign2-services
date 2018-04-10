@@ -240,7 +240,7 @@ app.post('/login1', (req, resp) => {
 });
 
 // after email found, check password
-app.post('/api/login2', (req, resp) => {
+app.post('/login2', (req, resp) => {
     var pass = md5(req.body.pw + req.body.salt, 'hex');
     User.find({password: pass}, {id: 1, first_name: 1, last_name: 1, email: 1}, (err, data) => {
             if (err) {
