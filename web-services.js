@@ -131,7 +131,7 @@ app.route('/api/portfolios/:user')
                         total: {$sum: "$owned"}
                     }},
                     {$project: {
-                        _id: 1, symbol: 1, user: 1. owned: 1, percentOwned: {$divide: [entry.owned, "$total"]}
+                        _id: 1, symbol: 1, user: 1, owned: 1, percentOwned: {$divide: [entry.owned, "$total"]}
                     }}
                     ], (err2, data2) => {
                         if (err2) {
