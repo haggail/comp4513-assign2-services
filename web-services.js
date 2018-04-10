@@ -183,7 +183,7 @@ app.route('/api/prices/average/:symbol')
         Price.aggregate([
             {$match: {name: req.params.symbol }},
             {$group: {_id: {$substr: ["$date", 0, 7] }, average: {$avg: "$close"}}},
-            {$sort: {_id: -1}}
+            {$sort: {_id: 1}}
             ], (err, data) => {
                 if (err) {
                     resp.json({message: 'Unable to connect to prices'});
