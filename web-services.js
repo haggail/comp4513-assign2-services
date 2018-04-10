@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var express = require('express');
 var parser = require('body-parser');
+var md5 = require('md5');
 
 // connect to mongodb
 mongoose.connect('mongodb://haggail:12345@ds111638.mlab.com:11638/heroku_7dsxmj2b');
@@ -41,10 +42,22 @@ var priceSchema = new mongoose.Schema({
     name: String
 });
 
+// define user schema
+var userSchema = new mongoose.Schema({
+    id: Number,
+    first_name: String,
+    last_name: String,
+    email: String,
+    salt: String,
+    password: String
+});
+
 // "compile" the schema into a model
 var Company = mongoose.model('Company', companySchema);
 var Portfolio = mongoose.model('Portfolio', portfolioSchema);
 var Price = mongoose.model('Price', priceSchema);
+var User = mongoose.model('Price', userSchema);
+
 
 // create an express app
 var app = express();
@@ -64,7 +77,7 @@ app.route('/api/companies')
     .get((req, resp) => {
         Company.find({}, {symbol: 1, name: 1}, (err, data) => {
             if (err) {
-                resp.json({message: 'Unable to connect to stocks'});
+                resp.json({message: 'Unable to connect to companies'});
             } else {
                 resp.json(data);
             }
@@ -76,7 +89,7 @@ app.route('/api/companies/:symbol')
     .get((req, resp) => {
         Company.find({symbol: req.params.symbol}, (err, data) => {
             if (err) {
-                resp.json({message: 'Unable to connect to stocks'});
+                resp.json({message: 'Unable to connect to companies'});
             } else {
                 resp.json(data);
             }
@@ -212,7 +225,18 @@ app.route('/api/prices/recent/:symbol')
             });
     });
 
-// allow CORS
+/* User Data */
+// find user email, return salt
+app.route('/api/users/:email')
+    .get((req, resp) => {  
+        User.find({email: req.params.email} {salt: 1}, (err, data) => {
+                if (err) {
+                    resp.json({message: 'Unable to connect to users'});
+                } else {
+                    resp.json(data);
+                }
+            });
+    });
 
 // use express to listen to port
 app.set('port', (process.env.PORT || 5000));
