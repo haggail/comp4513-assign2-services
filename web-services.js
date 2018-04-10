@@ -228,7 +228,7 @@ app.route('/api/prices/recent/:symbol')
 
 /* User Data */
 // find user email, return salt
-app.post('/api/users', (req, resp) => {
+app.post('/login1', (req, resp) => {
     var login = req.body.user;
     User.find({email: login}, {salt: 1}, (err, data) => {
             if (err) {
@@ -238,6 +238,8 @@ app.post('/api/users', (req, resp) => {
             }
     });
 });
+
+
 
 
 
