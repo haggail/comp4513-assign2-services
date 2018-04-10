@@ -230,7 +230,7 @@ app.route('/api/prices/recent/:symbol')
 // find user email, return salt
 app.post('/email-check', (req, resp) => {
     var login = req.body.user;
-    User.find({email: login} {salt: 1}, (err, data) => {
+    User.find({email: login}, {salt: 1}, (err, data) => {
             if (err) {
                 resp.json({message: 'Unable to connect to users'});
             } else {
@@ -241,7 +241,9 @@ app.post('/email-check', (req, resp) => {
 
 // if email exists, check user password
 app.post('/pw-check', (req, resp) => {
-    var pass=md5(req.body.pw + req.body.salt, ‘hex’);
+    var pw = req.body.pw;
+    var salt = req.body.salt
+    var pass=md5(pw + salt, ‘hex’);
     User.find({password: pass}, {id: 1, first_name: 1, last_name: 1, email: 1}, (err, data) => {
             if (err) {
                 resp.json({message: 'Unable to connect to users'});
