@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var express = require('express');
 var parser = require('body-parser');
-var md5 = require('md5');
+var md5 = require('crypto-md5');
 
 // connect to mongodb
 mongoose.connect('mongodb://haggail:12345@ds111638.mlab.com:11638/heroku_7dsxmj2b');
@@ -56,7 +56,7 @@ var userSchema = new mongoose.Schema({
 var Company = mongoose.model('Company', companySchema);
 var Portfolio = mongoose.model('Portfolio', portfolioSchema);
 var Price = mongoose.model('Price', priceSchema);
-var User = mongoose.model('Price', userSchema);
+var User = mongoose.model('User', userSchema);
 
 
 // create an express app
@@ -229,7 +229,7 @@ app.route('/api/prices/recent/:symbol')
 // find user email, return salt
 app.route('/api/users/:email')
     .get((req, resp) => {  
-        User.find({email: req.params.email} {salt: 1}, (err, data) => {
+        User.find({email: req.params.email}, {salt: 1}, (err, data) => {
                 if (err) {
                     resp.json({message: 'Unable to connect to users'});
                 } else {
