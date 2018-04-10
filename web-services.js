@@ -228,15 +228,16 @@ app.route('/api/prices/recent/:symbol')
 
 /* User Data */
 // find user email, return salt
-app.post('/api/users/', (req, resp) => {
-        User.find({first_name: req.body.user}, (err, data) => {
+app.post('/api/users', (req, resp) => {
+    var login = req.body.user;
+        User.find({email: login}, (err, data) => {
                 if (err) {
                     resp.json({message: 'Unable to connect to users'});
                 } else {
                     resp.json(data);
                 }
-            });
-    });
+        });
+});
 
 
 // use express to listen to port
