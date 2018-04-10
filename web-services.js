@@ -231,11 +231,13 @@ app.route('/api/prices/recent/:symbol')
 app.route('/api/users/')
     .post((req, resp) => {
     var login = req.body.user
+    resp.send(login)
         User.find({"email": login}, (err, data) => {
                 if (err) {
                     resp.json({message: 'Unable to connect to users'});
                 } else {
                     resp.json(data);
+                    
                 }
             });
     });
