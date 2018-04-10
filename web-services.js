@@ -230,12 +230,12 @@ app.route('/api/prices/recent/:symbol')
 // find user email, return salt
 app.route('/api/users/')
     .post((req, resp) => {
-        User.find({}, (err, data) => {
+    var login = req.body.user
+        User.find({email: login}, (err, data) => {
                 if (err) {
                     resp.json({message: 'Unable to connect to users'});
                 } else {
-                    resp.json(req.body.user);
-                    //resp.json(data);
+                    resp.json(data);
                 }
             });
     });
