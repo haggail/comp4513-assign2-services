@@ -114,8 +114,22 @@ app.route('/api/portfolios')
         });
     });
 
-// retrieve percentage summary of portfolio info for specified user
+// retrieve portfolio info for single user
 app.route('/api/portfolios/:user')
+    .get((req, resp) => {
+       
+        Portfolio.find({user: req.params.user}, (err, data) => {
+            if (err) {
+                resp.json({message: 'Unable to connect to portfolios'});
+            } else {
+                // return JSON retrieved by Mongo as response
+                resp.json(data);
+            }
+        });
+    });
+
+// retrieve percentage summary of portfolio info for specified user
+app.route('/api/portfolios/owned/:user')
     .get((req, resp) => {
         Portfolio.find({user: req.params.user}, (err, data) => {
             if (err) {
