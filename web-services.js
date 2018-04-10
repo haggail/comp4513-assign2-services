@@ -241,7 +241,7 @@ app.post('/email-check', (req, resp) => {
 
 // if email exists, check user password
 app.post('/pw-check', (req, resp) => {
-    var pass=md5(req.body.pwCheck + req.body.salt, ‘hex’);
+    var pass=md5(req.body.pw + req.body.salt, ‘hex’);
     User.find({password: pass}, {id: 1, first_name: 1, last_name: 1, email: 1}, (err, data) => {
             if (err) {
                 resp.json({message: 'Unable to connect to users'});
