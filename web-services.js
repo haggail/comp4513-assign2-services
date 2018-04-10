@@ -228,7 +228,7 @@ app.route('/api/prices/recent/:symbol')
 
 /* User Data */
 // find user email, return salt
-app.post('/email-check', (req, resp) => {
+app.post('/api/users', (req, resp) => {
     var login = req.body.user;
     User.find({email: login}, {salt: 1}, (err, data) => {
             if (err) {
@@ -239,19 +239,7 @@ app.post('/email-check', (req, resp) => {
     });
 });
 
-// if email exists, check user password
-app.post('/pw-check', (req, resp) => {
-    var pw = req.body.pw;
-    var salt = req.body.salt
-    var pass=md5(pw + salt, ‘hex’);
-    User.find({password: pass}, {id: 1, first_name: 1, last_name: 1, email: 1}, (err, data) => {
-            if (err) {
-                resp.json({message: 'Unable to connect to users'});
-            } else {
-                resp.json(data);
-            }
-    });
-});
+
 
 
 // use express to listen to port
