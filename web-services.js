@@ -62,9 +62,9 @@ var User = mongoose.model('User', userSchema);
 // create an express app
 var app = express();
 app.use(function (req, res, next) {
-    //res.setHeader('Access-Control-Allow-Origin', 'https://wiggly-kitty.herokuapp.com');
+    res.setHeader('Access-Control-Allow-Origin', 'https://wiggly-kitty.herokuapp.com');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5000');
+    //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5000');
     next();
 });	
 
@@ -231,7 +231,7 @@ app.route('/api/prices/recent/:symbol')
 app.route('/api/users/')
     .post((req, resp) => {
     console.log(req.body)
-        User.find({email: req.body.user}, (err, data) => {
+        User.find({}, (err, data) => {
                 if (err) {
                     resp.json({message: 'Unable to connect to users'});
                 } else {
