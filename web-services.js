@@ -235,7 +235,7 @@ app.route('/api/users/')
                     resp.json({message: 'Unable to connect to users'});
                 } else {
                     resp.json(req.body.user);
-                    resp.json(data);
+                    //resp.json(data);
                 }
             });
     });
