@@ -228,15 +228,27 @@ app.route('/api/prices/recent/:symbol')
 
 /* User Data */
 // find user email, return salt
-app.post('/api/users', (req, resp) => {
+app.post('/email-check', (req, resp) => {
     var login = req.body.user;
-        User.find({email: login}, (err, data) => {
-                if (err) {
-                    resp.json({message: 'Unable to connect to users'});
-                } else {
-                    resp.json(data);
-                }
-        });
+    User.find({email: login} {salt: 1}, (err, data) => {
+            if (err) {
+                resp.json({message: 'Unable to connect to users'});
+            } else {
+                resp.json(data);
+            }
+    });
+});
+
+// if email exists, check user password
+app.post('/pw-check', (req, resp) => {
+    var pass=md5(req.body.pwCheck + req.body.salt, ‘hex’);
+    User.find({password: pass}, {id: 1, first_name: 1, last_name: 1, email: 1}, (err, data) => {
+            if (err) {
+                resp.json({message: 'Unable to connect to users'});
+            } else {
+                resp.json(data);
+            }
+    });
 });
 
 
